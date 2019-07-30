@@ -1,0 +1,20 @@
+@startuml
+
+OZO -> OZO: Issue all tokens
+OZO -> PreSell: 1% for DEX
+OZO -> Company: 25% for IEO
+OZO -> SellAcc: 23% for toal sell
+OZO -> Freeze3: 17% freeze for 3 years
+OZO -> Freeze4: 17% freeze for 4 years
+OZO -> Freeze5: 17% freeze for 5 years
+PreSell -> DEX: order for sell 1% tokens
+Investors -> DEX: buying 1%
+Company -> STO: selling 25 % 
+Investors -> STO: buying 25 %
+SellAcc -> Referals: 10% of the sale
+SellAcc -> DEX: free selling 23 % 
+Investors -> DEX: buying 23 %
+Freeze3 -> DEX: unfreeze 17% 3 years
+Freeze4 -> DEX: unfreeze 17% 4 years
+Freeze5 -> DEX: unfreeze 17% 5 years
+@enduml

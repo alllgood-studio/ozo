@@ -1,0 +1,16 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE EXPRESSION #-}
+{-# SCRIPT_TYPE ASSET #-}
+
+let companyAdderss = Address(base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1')
+let timeStampEndPresell = 12345
+let afterPreSellPrice = 3000000
+match tx {    
+    case exTx: ExchangeTransaction =>
+        if ( tx.timestamp < timeStampEndPresell ) then {
+            exTx.sellOrder.sender == companyAdderss        
+        }  else {
+            exTx.sellOrder.price > afterPreSellPrice
+        }
+    case _ => tx.timestamp > timeStampEndPresell 
+}

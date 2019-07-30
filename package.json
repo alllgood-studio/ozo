@@ -1,0 +1,27 @@
+{
+  "name": "ozotop",
+  "version": "1.0.0",
+  "description": "``` npm install cp .sm-env .env npm run ozo-start ```",
+  "main": "index.js",
+  "scripts": {
+    "ozo-start": "npx surfboard test ozo.ride-test.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@waves/surfboard": "^1.6.0",
+    "dotenv": "^8.0.0"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alllgood-studio/ozo.git"
+  },
+  "author": "spread2009@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alllgood-studio/ozo/issues"
+  },
+  "homepage": "https://github.com/alllgood-studio/ozo#readme"
+}

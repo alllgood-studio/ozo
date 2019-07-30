@@ -1,0 +1,11 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE EXPRESSION #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+
+let dataUnfreeze = 1234567
+match (tx) {  
+    case t: TransferTransaction => 
+        t.timestamp > dataUnfreeze
+    case _ =>
+        false
+}
