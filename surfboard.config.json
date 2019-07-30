@@ -11,12 +11,12 @@
         "testnet": {
             "API_BASE": "https://testnodes.wavesnodes.com/",
             "CHAIN_ID": "T",
-            "SEED": "section ",
+            "SEED": "section swarm armed mango mule pulp mystery topic subway happy sunset cave gospel renew economy",
             "timeout": 60000
         }
        
     },
-    "defaultEnv": "devnet",
+    "defaultEnv": "testnet",
     "mocha": {
         "timeout": 60000
     }

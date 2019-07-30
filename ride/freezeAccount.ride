@@ -3,9 +3,10 @@
 {-# SCRIPT_TYPE ACCOUNT #-}
 
 let dataUnfreeze = 1234567
+let companyAddress = Address(base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1')
 match (tx) {  
     case t: TransferTransaction => 
-        t.timestamp > dataUnfreeze
+        t.timestamp > dataUnfreeze && t.recipient == companyAddress
     case _ =>
         false
 }

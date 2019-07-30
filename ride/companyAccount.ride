@@ -1,12 +1,13 @@
 {-# STDLIB_VERSION 3 #-}
-{-# CONTENT_TYPE EXPRESSION #-}
+{-# CONTENT_TYPE DAPP #-}
 {-# SCRIPT_TYPE ACCOUNT #-}
 
-match (tx) {  
-    case t: TransferTransaction => 
-        t.timestamp > extract(getInteger(this, "presellTime")) && t.sender == this
-    case e: ExchangeTransaction => 
-        e.sellOrder.sender == this && e.price >= extract(getInteger(this, "presellPrice"))    
-    case _ =>
-        false
+@Callable(i)
+func setEndPresellTime(time: Int) = {
+    if (i.caller == this) then
+      WriteSet([
+          DataEntry("endPresellTime", time)
+      ])
+    else
+       throw("Only owner can set presell time.")  
 }

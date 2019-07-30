@@ -1,0 +1,22 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE EXPRESSION #-}
+{-# SCRIPT_TYPE ASSET #-}
+
+let companyAdderss = Address(base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1')
+let timeStampEndPresell = 12345
+match tx {    
+    case exTx: ExchangeTransaction =>
+        if ( exTx.timestamp < extract(getInteger(companyAdderss, "endPresellTime")) ) then {
+            exTx.sellOrder.sender == companyAdderss || exTx.buyOrder.sender == companyAdderss       
+        }  else {
+            true
+        }
+    case t: TransferTransaction => 
+        if(t.timestamp < extract(getInteger(companyAdderss, "endPresellTime"))) then  {
+            t.sender == companyAdderss || t.recipient == companyAdderss
+        } else {
+            true
+        }   
+    case _ =>
+        false
+}
