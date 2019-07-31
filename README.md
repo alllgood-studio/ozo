@@ -1,4 +1,8 @@
-# OZO
+# OZOTOP
+
+OZOTOP is the decentralized experts community and self-regulating society model with robonomic ecosystem.
+Read more https://ozotop.io
+
 
 1. Install Waves Keeper [https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo]
 2. Create accounts in Waves Keeper for Company and for freeze4, freeze5, freeze6 and write seeds.
