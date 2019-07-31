@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "ozo-start": "npx surfboard test ozo.ride-test.js",
-    "ozo-dev": "npx surfboard test ozo.ride-test.js -v",
-    "deploy": "npx surfboard test share.test.js -v"
+    "ozo-test": "npx surfboard test ozo.ride-test.js -v",
+    "deploy": "npx surfboard test scripts/issue.js"
   },
   "directories": {
     "test": "test"

@@ -10,7 +10,7 @@ describe('OZOTOP test suite', async function () {
     let companyTx;
     let assetId;
     // let preSellScript;
-    const countTokens = 1123581321 * wvs;
+    const countTokens = 1123581321;
     const countFreeze4Years = Math.floor(countTokens * 17/100);
     const countFreeze5Years = Math.floor(countTokens * 17/100);
     const countFreeze6Years = Math.floor(countTokens * 17/100);
@@ -42,7 +42,7 @@ describe('OZOTOP test suite', async function () {
         console.log('address(account.company) :', address(accounts.company));
         companyScript = file('companyAccount.ride');
         const compiledCompany = compile(companyScript);
-        freezeScript = file('freezeAccount.ride');
+        freezeScript = file('freeze4Account.ride');
         companyTx = setScript({ script: compiledCompany, fee: 1400000 }, accounts.company);
         await broadcast(companyTx);
         await waitForTx(companyTx.id)
@@ -60,7 +60,7 @@ describe('OZOTOP test suite', async function () {
                 Read more https://ozotop.io`,
             quantity: countTokens,
             decimals: 8,
-            reissuable: false,
+            reissuable: true,
             fee: 1.005 * wvs,
             script: compiledScript
         }

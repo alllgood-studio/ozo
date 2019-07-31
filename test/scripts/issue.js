@@ -10,34 +10,31 @@ describe('OZOTOP test suite', async function () {
     let companyTx;
     let assetId;
     // let preSellScript;
-    const countTokens = 1123581321;
-    const countFreeze4Years = Math.floor(countTokens * 17/100);
-    const countFreeze5Years = Math.floor(countTokens * 17/100);
-    const countFreeze6Years = Math.floor(countTokens * 17/100);
-    const countCompany = countTokens - countFreeze4Years - countFreeze5Years - countFreeze6Years;
-    const endTimePresell = new Date("November 01, 2019 00:00:01").getTime();
-    const currentTime = new Date("August 02, 2019 00:00:01");
+    const countTokens = "112358132100000000";
+    const countFreeze4Years = 191008824; // Math.floor(countTokens * 17/100)/wvs;
+    const countFreeze5Years = 191008824; // Math.floor(countTokens * 17/100)/wvs;
+    const countFreeze6Years = 191008824; // Math.floor(countTokens * 17/100)/wvs;
+    const countCompany = Number(countTokens) - countFreeze4Years - countFreeze5Years - countFreeze6Years;
+    const endTimePresell = new Date(process.env.END_TIME_PRESELL).getTime();
+    const timeIssue = new Date(process.env.TIME_ISSUE);
     const dayInMs = 86400000;
-    const unfreeze4Date = currentTime.setFullYear(currentTime.getFullYear() + 3) + dayInMs;
-    const unfreeze5Date = currentTime.setFullYear(currentTime.getFullYear() + 1) + dayInMs;
-    const unfreeze6Date = currentTime.setFullYear(currentTime.getFullYear() + 1) + dayInMs;
+    const unfreeze4Date = timeIssue.setFullYear(timeIssue.getFullYear() + 3) + dayInMs;
+    const unfreeze5Date = timeIssue.setFullYear(timeIssue.getFullYear() + 1) + dayInMs;
+    const unfreeze6Date = timeIssue.setFullYear(timeIssue.getFullYear() + 1) + dayInMs;
+    console.log('unfreeze4Date :', unfreeze4Date, unfreeze5Date, unfreeze6Date);
     
-
+    const accounts = {};
     before(async function () {
-        await setupAccounts(
-            {
-                company: 2 * wvs,
-                investor1: 0.5 * wvs,
-                investor2: 0.05 * wvs,
-                account17_4: 0.05 * wvs,
-                account17_5: 0.05 * wvs,
-                account17_6: 0.05 * wvs
-            }
-        );
+        accounts.company = process.env.SEEDCOMPANY
+        accounts.account17_4 = process.env.FREEZE4SEED
+        accounts.account17_5 = process.env.FREEZE5SEED
+        accounts.account17_6 = process.env.FREEZE6SEED
+        
+        console.log('address(account.company) :', address(accounts.company));
         companyScript = file('companyAccount.ride');
         const compiledCompany = compile(companyScript);
         freezeScript = file('freeze4Account.ride');
-        companyTx = setScript({ script: compiledCompany }, accounts.company);
+        companyTx = setScript({ script: compiledCompany, fee: 1400000 }, accounts.company);
         await broadcast(companyTx);
         await waitForTx(companyTx.id)
         console.log('Script has been set')
@@ -49,11 +46,11 @@ describe('OZOTOP test suite', async function () {
             .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${ozoAddress}'`)
             let compiledScript = compile(scriptToken);
             const issueParam = {
-            name: Math.random().toString(36).substring(2, 8).toUpperCase(), // 'OZOTOP',
+            name: Math.random().toString(36).substring(2, 8).toUpperCase(), // process.env.NAME_TOKEN,
             description: `OZOTOP is the decentralized experts community and self-regulating society model with robonomic ecosystem.
                 Read more https://ozotop.io`,
             quantity: countTokens,
-            decimals: 2,
+            decimals: 8,
             reissuable: true,
             fee: 1.005 * wvs,
             script: compiledScript
@@ -67,7 +64,7 @@ describe('OZOTOP test suite', async function () {
     it('truly balance of the tokens', async function () {
         await assetBalance(assetId, address(accounts.company))
         .then((assetBal) => {
-            expect(assetBal).to.equal(countTokens);
+            expect(assetBal).to.equal(Number(countTokens));
         });
     });
     it('can set endPresellDate as owner of contract', async function () {
@@ -96,7 +93,7 @@ describe('OZOTOP test suite', async function () {
                 args: [{ type: 'integer', value: endTimePresell }],
                 payment: null
             },
-        }, accounts.investor1);
+        }, accounts.account17_4);
 
         expect(broadcast(iTxSet)).rejectedWith();
     })
@@ -247,92 +244,5 @@ describe('OZOTOP test suite', async function () {
         await expect(broadcast(tx)).rejectedWith();
     })
   
-    it('should success when company send tokens to investor1 after deploy dapp', async () => {
-        const countTokens = 100;
-        const tx = await transfer({
-            recipient: address(accounts.investor1),
-            amount: countTokens,
-            assetId: assetId,
-            fee: 0.01 * wvs
-        }, accounts.company);
-        await broadcast(tx);
-        await waitForTx(tx.id);
-    })
-    it('should reject when investor1 send tokens to investor2 before end time presell', async () => {
-        const countTokensSend = 90;
-        const tx = await transfer({
-            recipient: address(accounts.investor2),
-            amount: countTokensSend,
-            assetId: assetId,
-            fee: 0.01 * wvs
-        }, accounts.investor1);
-        await expect(broadcast(tx)).rejectedWith();
-    })
-    it('should success when investor1 return tokens to company before end time presell', async () => {
-        const countTokensSend = 5;
-        const partBalance = 95;
-        const tx = await transfer({
-            recipient: address(accounts.company),
-            amount: countTokensSend,
-            assetId: assetId,
-            fee: 0.005 * wvs
-        }, accounts.investor1);
-        
-        await broadcast(tx);
-        await waitForTx(tx.id);
-        await assetBalance(assetId, address(accounts.investor1))
-        .then((assetBal) => {
-            expect(assetBal).to.equal(partBalance);
-        });
-    })   
-  
-     it('can success sell on DEX from company account', async function () {
-         console.log('assetId :', assetId);
-        const currentTime = new Date().getTime();
-        const expirationTime = currentTime + 86400000;
-        const sellOrder = {
-            matcherPublicKey: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
-            orderType: 'sell',
-            assetPair: {
-                amountAsset: assetId,
-                priceAsset: null,
-            },
-            price: 1211354,
-            amount: 4444,
-            timestamp: currentTime,
-            expiration: expirationTime,
-            matcherFee: 0.008 * wvs
-        }
-
-       const txSell = await order(sellOrder, accounts.company);
-        await broadcast(txSell);
-        await waitForTx(txSell.id);
-       const buyOrder = {
-            orderType: 'buy',
-            assetPair: {
-                amountAsset: assetId,
-                priceAsset: null,
-            },
-            price: 1211354,
-            amount: 3333,
-            timestamp: currentTime,
-            expiration: expirationTime,
-            matcherFee: 0.008 * wvs 
-        }
-        const txBuy = await order(buyOrder, accounts.investor1);
-        await broadcast(txBuy);
-        await waitForTx(txBuy.id);
-       const exchTx = {
-            type: 7,
-            order1: sellOrder,
-            order2: buyOrder,
-            price: 1211354,
-            amount: 3333,
-            buyMatcherFee: 0.008 * wvs,
-            sellMatcherFee: 0.008 * wvs
-        }
-        await broadcast(exchTx);
-        await waitForTx(exchTx.id);
-
-    })
+ 
 })      
