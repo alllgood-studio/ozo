@@ -11,6 +11,12 @@
         "testnet": {
             "API_BASE": "https://testnodes.wavesnodes.com/",
             "CHAIN_ID": "T",
+            "SEED": "perfect decline slice surface culture apology head merit bench shed meat melt",
+            "timeout": 60000
+        },
+        "mainnet": {
+            "API_BASE": "https://nodes.wavesnodes.com/",
+            "CHAIN_ID": "W",
             "SEED": "section swarm armed mango mule pulp mystery topic subway happy sunset cave gospel renew economy",
             "timeout": 60000
         }
