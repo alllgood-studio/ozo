@@ -55,7 +55,7 @@ describe('OZOTOP test suite', async function () {
             .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${ozoAddress}'`)
             let compiledScript = compile(scriptToken);
             const issueParam = {
-            name: Math.random().toString(36).substring(2, 8).toUpperCase(), // 'OZOTOP',
+            name: process.env.NAME_TOKEN + Math.random().toString(36).substring(2, 8).toUpperCase(), // 'OZOTOP',
             description: `OZOTOP is the decentralized experts community and self-regulating society model with robonomic ecosystem.
                 Read more https://ozotop.io`,
             quantity: countTokens,
@@ -161,7 +161,7 @@ describe('OZOTOP test suite', async function () {
     it('set freeze script for 4 year', async () => {
         let freeze4Script = freezeScript;
         freeze4Script = freeze4Script
-         .replace(1234567, unfreeze4Date)
+         .replace(1659474001000, unfreeze4Date)
          .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${address(accounts.company)}'`);
         const compiled4Script =  compile(freeze4Script);
         const tx4 = setScript({ script: compiled4Script }, accounts.account17_4);
@@ -169,14 +169,14 @@ describe('OZOTOP test suite', async function () {
         await waitForTx(tx4.id)
         await assetBalance(assetId, address(accounts.account17_4))
         .then((assetBal) => {
-            expect(assetBal).to.equal(countFreeze4Years);
+            expect(assetBal).to.equal(Number(countFreeze4Years));
         });
     })
 
     it('set freeze script for 5 year', async () => {
         let freeze5Script = freezeScript;
         freeze5Script = freeze5Script
-         .replace(1234567, unfreeze5Date)
+         .replace(1659474001000, unfreeze5Date)
          .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${address(accounts.company)}'`);
         const compiled4Script =  compile(freeze5Script);
         const tx5 = setScript({ script: compiled4Script }, accounts.account17_5);
@@ -184,14 +184,14 @@ describe('OZOTOP test suite', async function () {
         await waitForTx(tx5.id)
         await assetBalance(assetId, address(accounts.account17_5))
         .then((assetBal) => {
-            expect(assetBal).to.equal(countFreeze5Years);
+            expect(assetBal).to.equal(Number(countFreeze5Years));
         });
     })
 
     it('set freeze script for 6 year', async () => {
         let freeze6Script = freezeScript;
         freeze6Script = freeze6Script
-         .replace(1234567, unfreeze6Date)
+         .replace(1659474001000, unfreeze6Date)
          .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${address(accounts.company)}'`);
         const compiled6Script =  compile(freeze6Script);
         const tx6 = setScript({ script: compiled6Script }, accounts.account17_6);
@@ -199,7 +199,7 @@ describe('OZOTOP test suite', async function () {
         await waitForTx(tx6.id)
         await assetBalance(assetId, address(accounts.account17_6))
         .then((assetBal) => {
-            expect(assetBal).to.equal(countFreeze6Years);
+            expect(assetBal).to.equal(Number(countFreeze6Years));
         });
     })
 
