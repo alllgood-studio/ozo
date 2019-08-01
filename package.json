@@ -6,7 +6,8 @@
   "scripts": {
     "ozo-start": "npx surfboard test ozo.ride-test.js",
     "ozo-test": "npx surfboard test ozo.ride-test.js -v",
-    "deploy": "npx surfboard test scripts/issue.js"
+    "deploy": "npx surfboard test scripts/issue.js",
+    "new-date-presell": "npx surfboard test scripts/presellTimeSwitcher.js -v"
   },
   "directories": {
     "test": "test"

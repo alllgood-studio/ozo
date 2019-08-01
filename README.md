@@ -39,7 +39,7 @@ npm run deploy
 5. Choice tab wallet ![wall1](https://user-images.githubusercontent.com/11519562/62214910-a1b22980-b3ae-11e9-9c80-38e18b587d02.png)
 
 
-6. For issued token OD97UH see info: 
+6. For issued token OD97UH we can see info: 
 ![issue_info](https://user-images.githubusercontent.com/11519562/62215233-39177c80-b3af-11e9-981e-fc673e516f66.png)
 
 7. Press link "View Transaction" in the opened popup window:
@@ -48,7 +48,7 @@ npm run deploy
 8. The link redirected to new a window of the browser with the transaction:
 ![explorer-tx-info](https://user-images.githubusercontent.com/11519562/62215969-94963a00-b3b0-11e9-81f5-d503ba6e0f03.png)
 
-9. Transactions after issue 1123581321 LRM8RL tokens on company account and sent tokens for freeze:
+9. There are transactions after issue 1123581321 LRM8RL tokens on company account and sent tokens for freeze:
 [https://wavesexplorer.com/testnet/address/3N9fzexZxi7HrPcfizpvpFcaAnvpyuuMKPg]
 10. Account freeze4 get 191008824 LRM8RL tokens [https://wavesexplorer.com/testnet/address/3N15pqgAHbMviVmeoseJ7H6AGW8mSoMgpdn]
 11. Account freeze5 get 191008824 LRM8RL tokens [https://wavesexplorer.com/testnet/address/3N15pqgAHbMviVmeoseJ7H6AGW8mSoMgpdn]
@@ -60,6 +60,21 @@ npm run deploy
 16. Success set script for freeze of the account freeze6 [https://wavesexplorer.com/testnet/tx/3zDCQCA4PqZFchrccQL7Gu1oYdPnNzPsABV4DTUh3Pe1]
 17. Company account can send order sell/buy on dex:
 ![listingDex](https://user-images.githubusercontent.com/11519562/62228985-653ef780-b3c7-11e9-9d1a-bf4bef40ffd3.png)
+
+
+## Change date presell
+1. Set in file .env value for NEW_TIME_PRESELL for example:
+```
+NEW_TIME_PRESELL="October 01, 2019 00:00:01"
+```
+2. Run command for changin date presell in a terminal of a IDE
+```
+npm run new-date-presell
+```
+3. There is new presell date in blockchain : "value": 1569877201000. It we can see in the terminal:
+![newDate](https://user-images.githubusercontent.com/11519562/62272517-e0de8a00-b443-11e9-958c-06d26eaf7c3b.png)
+
+ or check it by request [https://pool.testnet.wavesnodes.com/addresses/data/3N9fzexZxi7HrPcfizpvpFcaAnvpyuuMKPg]
 
 
 ## For testing

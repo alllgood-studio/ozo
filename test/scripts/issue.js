@@ -46,7 +46,7 @@ describe('OZOTOP test suite', async function () {
             .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${ozoAddress}'`)
             let compiledScript = compile(scriptToken);
             const issueParam = {
-            name: Math.random().toString(36).substring(2, 8).toUpperCase(), // process.env.NAME_TOKEN,
+            name: process.env.NAME_TOKEN + Math.random().toString(36).substring(2, 8).toUpperCase(), // process.env.NAME_TOKEN,
             description: `OZOTOP is the decentralized experts community and self-regulating society model with robonomic ecosystem.
                 Read more https://ozotop.io`,
             quantity: countTokens,
