@@ -67,7 +67,7 @@ npm run deploy
 ```
 NEW_TIME_PRESELL="October 01, 2019 00:00:01"
 ```
-2. Run command for changin date presell in a terminal of a IDE
+2. Run command for change date presell in a terminal of a IDE
 ```
 npm run new-date-presell
 ```
