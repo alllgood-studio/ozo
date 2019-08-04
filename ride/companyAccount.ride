@@ -11,3 +11,12 @@ func setEndPresellTime(time: Int) = {
     else
        throw("Only owner can set presell time.")  
 }
+@Callable(i)
+func setTokenId(id: String) = {
+    if (i.caller == this) then
+      WriteSet([
+          DataEntry("tokenId", id)
+      ])
+    else
+       throw("Only owner can set token id.")  
+}

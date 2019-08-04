@@ -93,6 +93,23 @@ describe('OZOTOP test suite', async function () {
         expect(iTxSet.call.args[0].value).to.equal(endTimePresell);
     })
 
+    it('can set tokenId as owner of contract', async function () {
+        const iTxSet = invokeScript({
+            dApp: address(accounts.company),
+            fee: 0.09 * wvs,
+            call: {
+                function: "setTokenId",
+                args: [{ type: 'integer', value: assetId }],
+                payment: null
+            },
+        }, accounts.company);
+
+        await broadcast(iTxSet);
+        await waitForTx(iTxSet.id);
+        console.dir(iTxSet.call.args[0].value);
+        expect(iTxSet.call.args[0].value).to.equal(assetId);
+    })
+
     it('should be rejected when non owner try set endPresellDate ', async function () {
         const iTxSet = invokeScript({
             dApp: address(accounts.company),

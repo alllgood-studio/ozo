@@ -17,7 +17,7 @@
         "mainnet": {
             "API_BASE": "https://nodes.wavesnodes.com/",
             "CHAIN_ID": "W",
-            "SEED": "section swarm armed mango mule pulp mystery topic subway happy sunset cave gospel renew economy",
+            "SEED": "",
             "timeout": 60000
         }
        

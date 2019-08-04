@@ -5,9 +5,9 @@
 let companyAdderss = Address(base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1')
 match tx {    
     case exTx: ExchangeTransaction =>
-        if ( exTx.timestamp < extract(getInteger(companyAdderss, "endPresellTime")) ) then {
-            exTx.sellOrder.sender == companyAdderss || exTx.buyOrder.sender == companyAdderss       
-        }  else {
+        if ( exTx.timestamp < extract(getInteger(companyAdderss, "endPresellTime")) && exTx.buyOrder.sender != companyAdderss) then {
+            true
+        } else {
             true
         }
     case t: TransferTransaction => 
@@ -15,7 +15,11 @@ match tx {
             t.sender == companyAdderss || t.recipient == companyAdderss
         } else {
             true
-        }   
+        }
+    case sc: SetAssetScriptTransaction =>
+        sc.sender == companyAdderss 
+    case br: BurnTransaction =>
+            br.sender == companyAdderss 
     case _ =>
         false
 }

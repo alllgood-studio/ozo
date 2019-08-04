@@ -46,7 +46,7 @@ describe('OZOTOP test suite', async function () {
             .replace(`base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1'`, `base58'${ozoAddress}'`)
             let compiledScript = compile(scriptToken);
             const issueParam = {
-            name: process.env.NAME_TOKEN + Math.random().toString(36).substring(2, 8).toUpperCase(), // process.env.NAME_TOKEN,
+            name: process.env.NAME_TOKEN, // + Math.random().toString(36).substring(2, 8).toUpperCase(), // process.env.NAME_TOKEN,
             description: `OZOTOP is the decentralized experts community and self-regulating society model with robonomic ecosystem.
                 Read more https://ozotop.io`,
             quantity: countTokens,
@@ -83,7 +83,22 @@ describe('OZOTOP test suite', async function () {
         console.dir(iTxSet.call.args[0].value);
         expect(iTxSet.call.args[0].value).to.equal(endTimePresell);
     })
+    it('can set tokenId as owner of contract', async function () {
+        const iTxSet = invokeScript({
+            dApp: address(accounts.company),
+            fee: 0.09 * wvs,
+            call: {
+                function: "setTokenId",
+                args: [{ type: 'string', value: assetId }],
+                payment: null
+            },
+        }, accounts.company);
 
+        await broadcast(iTxSet);
+        await waitForTx(iTxSet.id);
+        console.dir(iTxSet.call.args[0].value);
+        expect(iTxSet.call.args[0].value).to.equal(assetId);
+    })
     it('should be rejected when non owner try set endPresellDate ', async function () {
         const iTxSet = invokeScript({
             dApp: address(accounts.company),

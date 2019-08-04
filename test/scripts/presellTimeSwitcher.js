@@ -5,14 +5,9 @@ describe('OZOTOP test suite', async function () {
 
     this.timeout(500000);
     const newDatePresell = new Date(process.env.NEW_TIME_PRESELL).getTime();
-   
-    
     const accounts = {};
     before(async function () {
-        accounts.company = process.env.SEEDCOMPANY;
-        accounts.account17_4 = process.env.FREEZE4SEED;
-        accounts.account17_5 = process.env.FREEZE5SEED;
-        accounts.account17_6 = process.env.FREEZE6SEED; ;       
+        accounts.company = process.env.SEEDCOMPANY;    
        
         console.log('Script has been set')
     });

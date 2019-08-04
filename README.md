@@ -76,6 +76,15 @@ npm run new-date-presell
 
  or check it by request [https://pool.testnet.wavesnodes.com/addresses/data/3N9fzexZxi7HrPcfizpvpFcaAnvpyuuMKPg]
 
+### Change date by waves IDE
+1. Start waves IDE in [https://ide.wavesplatform.com/].
+2. Switch in waves keeper extantion company account as main.
+3. In console the IDE paste an run command:
+```
+broadcast(invokeScript({dApp: "ADDRESSCOMPANY", call: {function: "setEndPresellTime", args: [{type: "integer", value: newDatePesellValue}]} }))
+```
+where newDatePesellValue - time in millisecond for example 1569186001000
+for check or convert need visit [https://codechi.com/dev-tools/date-to-millisecond-calculators/] 
 
 ## For testing
 1. Set in file surfboard.config.json seed of an account which pay comissions in devnet or testnet
