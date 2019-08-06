@@ -3,7 +3,7 @@
 {-# SCRIPT_TYPE ACCOUNT #-}
 
 let dataUnfreeze = 1691010001000
-let companyAddress = Address(base58'3MvHSFKcaY71wp62waNAqj2NPikV8fK5nh1')
+let companyAddress = Address(base58'3PGpmm5DLM4f8DyKrGQfh2MQDHDQXhYsUwY')
 match (tx) {  
     case t: TransferTransaction => 
         t.timestamp > dataUnfreeze && t.recipient == companyAddress

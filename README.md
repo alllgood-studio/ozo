@@ -81,7 +81,7 @@ npm run new-date-presell
 2. Switch in waves keeper extantion company account as main.
 3. In console the IDE paste an run command:
 ```
-broadcast(invokeScript({dApp: "ADDRESSCOMPANY", call: {function: "setEndPresellTime", args: [{type: "integer", value: newDatePesellValue}]} }))
+broadcast(invokeScript({dApp: "ADDRESSCOMPANY", call: {function: "setEndPresellTime", fee: 9000000 args: [{type: "integer", value: newDatePesellValue}]} }, "SEEDCALLERACCOUNT"))
 ```
 where newDatePesellValue - time in millisecond for example 1569186001000
 for check or convert need visit [https://codechi.com/dev-tools/date-to-millisecond-calculators/] 
