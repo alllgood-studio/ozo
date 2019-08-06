@@ -5,19 +5,19 @@
         "devnet": {
             "API_BASE": "https://devnet-aws-ir-2.wavesnodes.com/",
             "CHAIN_ID": "D",
-            "SEED": "create genesis wallet devnet-0",
+            "SEED": "YOUR DEV NET SEED",
             "timeout": 60000
         },
         "testnet": {
             "API_BASE": "https://testnodes.wavesnodes.com/",
             "CHAIN_ID": "T",
-            "SEED": "perfect decline slice surface culture apology head merit bench shed meat melt",
+            "SEED": "YOUR TEST NET SEED",
             "timeout": 60000
         },
         "mainnet": {
             "API_BASE": "https://nodes.wavesnodes.com/",
             "CHAIN_ID": "W",
-            "SEED": "",
+            "SEED": "YOUR MAIN NET SEED",
             "timeout": 60000
         }
        
